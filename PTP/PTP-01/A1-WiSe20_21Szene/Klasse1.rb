@@ -18,6 +18,13 @@ class Klasse1
     @fir_base.sichtbar_machen
   end
 
+  def unsichtbar_machen()
+    @fir_stem.unsichtbar_machen
+    @fir_top.unsichtbar_machen
+    @fir_mid.unsichtbar_machen
+    @fir_base.unsichtbar_machen
+  end
+
   def position()
     base = @fir_stem.obere_linke_ecke()
     x = base.x()+(@fir_base.hoehe())/2
@@ -38,6 +45,19 @@ class Klasse1
     @fir_top.bewegen(delta_x, delta_y,wdh, wdh_nach,starten_nach)
   end
 
+  def in_schwarz_weiss_aendern()
+    @fir_stem.farbe_aendern('schwarz')
+    @fir_base.farbe_aendern('schwarz')
+    @fir_mid.farbe_aendern('schwarz')
+    @fir_top.farbe_aendern('schwarz')
+  end
+
+  def in_farbig_aendern()
+    @fir_stem.farbe_aendern("orange")
+    @fir_base.farbe_aendern('gruen')
+    @fir_mid.farbe_aendern('gruen')
+    @fir_top.farbe_aendern('gruen')
+  end
 
 
 

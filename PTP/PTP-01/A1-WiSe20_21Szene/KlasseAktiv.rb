@@ -19,6 +19,13 @@ class KlasseAktiv
     @smile_mouth.sichtbar_machen
   end
 
+  def unsichtbar_machen()
+    @smile_head.unsichtbar_machen
+    @smile_eye_l.unsichtbar_machen
+    @smile_eye_r.unsichtbar_machen
+    @smile_mouth.unsichtbar_machen
+  end
+
   def position()
     sm_center=@smile_head.mittelpunkt()
     x = sm_center.x()
@@ -37,6 +44,32 @@ class KlasseAktiv
     x_delta = ziel_x - position().x()
     y_delta = ziel_y - position().y()
     bewegen(x_delta, y_delta,1, 1,0)
+  end
+
+  def animieren()
+    @smile_head.bewegen(10, 0,50, 10,1)
+    @smile_eye_l.bewegen(10, 0,50, 10,1)
+    @smile_eye_r.bewegen(10, 0,50, 10,1)
+    @smile_mouth.bewegen(10, 0,50, 10,1)
+    @smile_head.bewegen(-10, 0,50, 10,30)
+    @smile_eye_l.bewegen(-10, 0,50, 10,30)
+    @smile_eye_r.bewegen(-10, 0,50, 10,30)
+    @smile_mouth.bewegen(-10, 0,50, 10,30)
+  end
+
+  def in_schwarz_weiss_aendern()
+    @smile_head.farbe_aendern('grau')
+    @smile_eye_l.farbe_aendern('schwarz')
+    @smile_eye_r.farbe_aendern('schwarz')
+    @smile_mouth.farbe_aendern('schwarz')
+
+  end
+
+  def in_farbig_aendern()
+    @smile_head.farbe_aendern('rot')
+    @smile_eye_l.farbe_aendern('blau')
+    @smile_eye_r.farbe_aendern('blau')
+    @smile_mouth.farbe_aendern('blau')
   end
 
 

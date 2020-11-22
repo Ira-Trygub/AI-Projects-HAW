@@ -16,6 +16,12 @@ class Klasse2
     @foundation.sichtbar_machen
   end
 
+  def unsichtbar_machen()
+    @haus.unsichtbar_machen
+    @roof.unsichtbar_machen
+    @foundation.unsichtbar_machen
+  end
+
   def position()
     found=@foundation.obere_linke_ecke()
     x = found.x() + (@foundation.breite())/2
@@ -33,6 +39,19 @@ class Klasse2
     x_delta = ziel_x - position().x()
     y_delta = ziel_y - position().y()
     bewegen(x_delta, y_delta,1, 1,0)
+  end
+
+  def in_schwarz_weiss_aendern()
+    @foundation.farbe_aendern('grau')
+    @haus.farbe_aendern('grau')
+    @roof.farbe_aendern('grau')
+  end
+
+  def in_farbig_aendern()
+    @foundation.farbe_aendern('blau')
+    @haus.farbe_aendern('blau')
+    @roof.farbe_aendern('blau')
+
   end
 
 
