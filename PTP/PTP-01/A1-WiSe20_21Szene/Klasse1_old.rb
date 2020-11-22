@@ -3,13 +3,11 @@ require "./Kreis"
 require "./Dreieck"
 require "./Leinwand"
 
-class Klasse1
+class Klasse3
   def initialize()
-    @fir_stem = Rechteck.new(pos_x = 285, pos_y = 280, hoehe = 30, breite = 60, farbe = :brown)
-    @fir_top = Dreieck.new(pos_x = 300, pos_y = 130, hoehe = 70, breite = 80, farbe = :green)
-    @fir_mid = Dreieck.new(pos_x = 300, pos_y = 150, hoehe = 100, breite =100, farbe = :green)
-    @fir_base = Dreieck.new(pos_x = 300, pos_y = 180, hoehe = 130, breite = 140, farbe = :green)
-
+    @haus = Rechteck.new(20, 80, 120, 100, :blue)
+    @roof = Dreieck.new(0, 80,80,160, :blue)
+    @foundation = Rechteck.new(10, 180, 140, 15, :blue)
   end
 
   def sichtbar_machen()
@@ -19,10 +17,10 @@ class Klasse1
     @fir_base.sichtbar_machen
   end
 
-  def position()
-    top=@fit_top.
+  #def position()
+  #top=@fit_top.
 
-  end
+  #end
 
 
 

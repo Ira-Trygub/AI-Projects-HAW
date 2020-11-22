@@ -5,11 +5,10 @@ require "./Leinwand"
 
 class Klasse1
   def initialize()
-    @fir_stem = Rechteck.new(pos_x = 285, pos_y = 280, hoehe = 30, breite = 60, farbe = :brown)
-    @fir_top = Dreieck.new(pos_x = 300, pos_y = 130, hoehe = 70, breite = 80, farbe = :green)
-    @fir_mid = Dreieck.new(pos_x = 300, pos_y = 150, hoehe = 100, breite =100, farbe = :green)
-    @fir_base = Dreieck.new(pos_x = 300, pos_y = 180, hoehe = 130, breite = 140, farbe = :green)
-
+    @fir_stem = Rechteck.new(40, 120, 20, 20, :brown)
+    @fir_top = Dreieck.new(50,30, 30, 60, :green)
+    @fir_mid = Dreieck.new(50, 55, 40, 80, :green)
+    @fir_base = Dreieck.new(50, 80,45, 90,  :green)
   end
 
   def sichtbar_machen()
@@ -20,9 +19,25 @@ class Klasse1
   end
 
   def position()
-    top=@fit_top.
-
+    base = @fir_stem.obere_linke_ecke()
+    x = base.x()+(@fir_base.hoehe())/2
+    y = base.y()+@fir_base.breite()
+    return Punkt.new(x,y)
   end
+
+  def auf_position_setzen(ziel_x, ziel_y)
+    x_delta = ziel_x-position().x()
+    y_delta = ziel_y-position().y()
+    bewegen(x_delta, y_delta,1, 1,0)
+  end
+
+  def bewegen(delta_x, delta_y,wdh, wdh_nach,starten_nach)
+    @fir_stem.bewegen(delta_x, delta_y,wdh, wdh_nach,starten_nach)
+    @fir_base.bewegen(delta_x, delta_y,wdh, wdh_nach,starten_nach)
+    @fir_mid.bewegen(delta_x, delta_y,wdh, wdh_nach,starten_nach)
+    @fir_top.bewegen(delta_x, delta_y,wdh, wdh_nach,starten_nach)
+  end
+
 
 
 
