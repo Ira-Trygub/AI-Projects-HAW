@@ -53,7 +53,7 @@ class Klasse1
   end
 
   def in_farbig_aendern()
-    @fir_stem.farbe_aendern("orange")
+    @fir_stem.farbe_aendern('braun')
     @fir_base.farbe_aendern('gruen')
     @fir_mid.farbe_aendern('gruen')
     @fir_top.farbe_aendern('gruen')

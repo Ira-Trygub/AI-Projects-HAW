@@ -1,6 +1,3 @@
-#Praktikumsaufgabe 2
-# 1) Bedingte Anweisungen: Thermometer
-
 class Temperatur_gefuehlt
 
   def self.get_temperatur1(t)
@@ -87,9 +84,28 @@ def temperatur5(t)
   puts res
 end
 
+puts temperatur1(-40)
+puts temperatur2(-40)
+puts temperatur3(-40)
+puts temperatur4(-40)
+puts temperatur5(-40)
 
-temperatur1(24)
+puts temperatur1(15)
+puts temperatur2(15)
+puts temperatur3(15)
+puts temperatur4(15)
+puts temperatur5(15)
 
+puts temperatur1(22)
+puts temperatur2(22)
+puts temperatur3(22)
+puts temperatur4(22)
+puts temperatur5(22)
 
+puts temperatur1(30)
+puts temperatur2(30)
+puts temperatur3(30)
+puts temperatur4(30)
+puts temperatur5(30)
 
 

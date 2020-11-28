@@ -7,7 +7,7 @@ class Klasse2
   def initialize()
     @haus = Rechteck.new(20, 80, 120, 100, :blue)
     @roof = Dreieck.new(80, 0,80,160, :blue)
-    @foundation = Rechteck.new(10, 180, 140, 15, :blue)
+    @foundation = Rechteck.new(10, 180, 140, 15, :orange)
   end
 
   def sichtbar_machen()
@@ -42,13 +42,13 @@ class Klasse2
   end
 
   def in_schwarz_weiss_aendern()
-    @foundation.farbe_aendern('grau')
+    @foundation.farbe_aendern('schwarz')
     @haus.farbe_aendern('grau')
     @roof.farbe_aendern('grau')
   end
 
   def in_farbig_aendern()
-    @foundation.farbe_aendern('blau')
+    @foundation.farbe_aendern('orange')
     @haus.farbe_aendern('blau')
     @roof.farbe_aendern('blau')
 

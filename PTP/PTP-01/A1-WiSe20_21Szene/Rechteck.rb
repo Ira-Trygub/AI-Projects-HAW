@@ -131,6 +131,11 @@ class Rechteck
     if neue_farbe == "orange"
       @farbe = :orange
     end
+
+    if neue_farbe == "braun"
+      @farbe= :brown
+    end
+
     if (sichtbar?)
       Leinwand.gib_einzige_instanz().farbe_aendern(self)
     end
