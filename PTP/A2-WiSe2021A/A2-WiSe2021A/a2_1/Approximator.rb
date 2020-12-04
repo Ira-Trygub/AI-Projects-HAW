@@ -14,16 +14,17 @@ class Approximator
   # Methode, die das n bestimmt für das PI/6- approx_pi_sechstel < 10e-6
 
   def n_fuer_differenz_kleiner(abweichung) # Abweichung 10e-6
-    i = 1
+    i = 0
     ppi = ((Math::PI) ** 2) / 6
     app_pi_qua = 0.0
     diff = abweichung
       while diff >= abweichung
+        i += 1
         app_pi_qua += 1.0 / (i ** 2)
         diff =  ppi - app_pi_qua
-        i += 1
+
       end
-                                           #i
+    i
   end
 end
 

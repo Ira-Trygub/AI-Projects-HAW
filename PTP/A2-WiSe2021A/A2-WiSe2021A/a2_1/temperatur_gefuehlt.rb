@@ -1,6 +1,6 @@
-class Temperatur_gefuehlt
+class TemperaturGefuehlt
 
-  def self.get_temperatur1(t)
+  def self.get_temperatur1(t)  #Klassenmethode
     if t >= -60 && t < 12
       :kalt
     else
@@ -16,7 +16,7 @@ class Temperatur_gefuehlt
     end
   end
 
-  def self.get_temperatur2(t)
+  def self.get_temperatur2(t)  #Klassenmethode
     if t >= -60 && t < 12
       :kalt
     elsif t >= 12 && t < 20
@@ -28,7 +28,7 @@ class Temperatur_gefuehlt
     end
   end
 
-  def self.get_temperatur3(t)
+  def self.get_temperatur3(t)  #Klassenmethode
     case
     when t >= -60 && t < 12 then
       :kalt
@@ -41,7 +41,7 @@ class Temperatur_gefuehlt
     end
   end
 
-  def self.get_temperatur4(t)
+  def self.get_temperatur4(t)  #Klassenmethode
     case t
     when -60..11
       :kalt
@@ -54,33 +54,33 @@ class Temperatur_gefuehlt
     end
   end
 
-  def self.get_temperatur5(t)
+  def self.get_temperatur5(t)  #Klassenmethode
     (t >= -60 && t < 12) ? :kalt : (t >= 12 && t < 20) ? :moderat : (t >= 20 && t < 25) ? :warm : :heiss
   end
 end
 
 def temperatur1(t)
-  res = Temperatur_gefuehlt.get_temperatur1(t)
+  res = TemperaturGefuehlt.get_temperatur1(t)
   puts res
 end
 
 def temperatur2(t)
-  res = Temperatur_gefuehlt.get_temperatur2(t)
+  res = TemperaturGefuehlt.get_temperatur2(t)
   puts res
 end
 
 def temperatur3(t)
-  res = Temperatur_gefuehlt.get_temperatur3(t)
+  res = TemperaturGefuehlt.get_temperatur3(t)
   puts res
 end
 
 def temperatur4(t)
-  res = Temperatur_gefuehlt.get_temperatur4(t)
+  res = TemperaturGefuehlt.get_temperatur4(t)
   puts res
 end
 
 def temperatur5(t)
-  res = Temperatur_gefuehlt.get_temperatur5(t)
+  res = TemperaturGefuehlt.get_temperatur5(t)
   puts res
 end
 
