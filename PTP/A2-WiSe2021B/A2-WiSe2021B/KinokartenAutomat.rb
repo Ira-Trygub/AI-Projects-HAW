@@ -20,23 +20,36 @@ class KinokartenAutomat
     @eingeworfen = 0
     # Summe aller Einzahlungen für diesen Automat
     @summe_automat = 0
-    # TODO Tarif setzen
+    @tarif = nil
   end
 
   def tarif_gewaehlt?()
-    # TODO
+    return @tarif != nil
   end
 
   def tarif_waehlen(tarif)
-    # TODO
+    if tarif_gewaehlt?()
+      puts ("Es wurde bereits ein Tarif gewählt. Vorgang wird abgebrochen.")
+      abbrechen()
+    end
+    @tarif = tarif
   end
 
   def abbrechen()
-    # TODO
+    bereits_eingeworfen = @eingeworfen
+    @tarif = nil
+    @eingeworfen = 0
+    return bereits_eingeworfen
   end
 
   def karten_preis
-    # TODO
+    if !tarif_gewaehlt?()
+      puts ("Es wurde noch kein Tarif gewählt. Bitte wählen Sie zuerst einen Tarif aus.")
+      return 0
+    else
+      kartenpreis = @tarif.betrag
+      return kartenpreis
+    end
   end
 
   # Liefert die Summe aller eingeworfenen Beträge
@@ -49,17 +62,24 @@ class KinokartenAutomat
     return @eingeworfen
   end
 
-  # Nimmt den eingeworfenen Betrag entgegen und erhöht den 
+  # Nimmt den eingeworfenen Betrag entgegen und erhöht den
   # bisher gezahlten Betrag für eine Kinokarte
 
   def betrag_einwerfen(betrag)
-    # TODO
+    if !tarif_gewaehlt?()
+      puts ("Es wurde noch kein Tarif gewählt. Bitte wählen Sie zuerst einen Tarif aus.")
+    else
+      @eingeworfen += betrag
+    end
   end
 
 
   # Gibt das Wechselgeld zurück und setzt den eingeworfenen Betrag auf 0
   def wechsel_geld()
-    # TODO
+    restgeld = @eingeworfen - @tarif.betrag
+    puts("Das Restgeld beträgt " + restgeld.to_s() + " Euro.")
+    @eingeworfen = 0
+    return restgeld
   end
 
   # Druckt die Kinokarte
@@ -67,19 +87,28 @@ class KinokartenAutomat
   # Am Ende des Drucks wir der bisher eingeworfene Betrag wieder auf 0 gesetzt,
 
   def karte_drucken()
-    # TODO ÄNDERN
-    puts("------------------")
-    puts("- Cinema Magico -")
-    puts("- Phantastische Tierwesen")
-    # TODO diese Zeile ändern
-    puts("- Preis " + @tarif.betrag().to_s() + " Euro")
-    puts("- Bezahlt " + @eingeworfen.to_s() + " Euro")
-    puts("------------------")
-    # die Gesamtsumme, mit dem der Automat nach der letzten Leerung
-    # gefuettert wurde
-    @summe_automat = @summe_automat + @eingeworfen
-    @eingeworfen = 0
-    return
+    if !tarif_gewaehlt?()
+      puts ("Es wurde noch kein Tarif gewählt. Bitte wählen Sie zuerst einen Tarif aus.")
+    elsif @tarif.betrag - @eingeworfen > 0
+      offener_betrag = @tarif.betrag - @eingeworfen
+      puts ("Sie müssen noch " + offener_betrag.to_s() + " Euro einzahlen.")
+    else
+      kartenpreis = @tarif.betrag
+
+      puts("------------------")
+      puts("- Cinema Magico -")
+      puts("- Phantastische Tierwesen")
+      # TODO diese Zeile ändern
+      puts("- Preis " + @tarif.betrag().to_s() + " Euro")
+      puts("- Bezahlt " + @eingeworfen.to_s() + " Euro")
+      puts("------------------")
+      # die Gesamtsumme, mit dem der Automat nach der letzten Leerung
+      # gefuettert wurde
+      wechsel_geld()
+      @summe_automat += kartenpreis
+      @tarif = nil
+      return
+    end
   end
 
   def to_s()
