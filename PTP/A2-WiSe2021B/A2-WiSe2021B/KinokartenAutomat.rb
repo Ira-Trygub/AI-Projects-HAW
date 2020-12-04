@@ -31,8 +31,9 @@ class KinokartenAutomat
     if tarif_gewaehlt?()
       puts ("Es wurde bereits ein Tarif gewählt. Vorgang wird abgebrochen.")
       abbrechen()
+    else
+      @tarif = tarif.betrag
     end
-    @tarif = tarif
   end
 
   def abbrechen()
@@ -47,8 +48,7 @@ class KinokartenAutomat
       puts ("Es wurde noch kein Tarif gewählt. Bitte wählen Sie zuerst einen Tarif aus.")
       return 0
     else
-      kartenpreis = @tarif.betrag
-      return kartenpreis
+      return @tarif
     end
   end
 
@@ -76,7 +76,7 @@ class KinokartenAutomat
 
   # Gibt das Wechselgeld zurück und setzt den eingeworfenen Betrag auf 0
   def wechsel_geld()
-    restgeld = @eingeworfen - @tarif.betrag
+    restgeld = @eingeworfen - @tarif
     puts("Das Restgeld beträgt " + restgeld.to_s() + " Euro.")
     @eingeworfen = 0
     return restgeld
@@ -89,18 +89,18 @@ class KinokartenAutomat
   def karte_drucken()
     if !tarif_gewaehlt?()
       puts ("Es wurde noch kein Tarif gewählt. Bitte wählen Sie zuerst einen Tarif aus.")
-    elsif @tarif.betrag - @eingeworfen > 0
-      offener_betrag = @tarif.betrag - @eingeworfen
+    elsif @tarif - @eingeworfen > 0
+      offener_betrag = @tarif - @eingeworfen
       puts ("Sie müssen noch " + offener_betrag.to_s() + " Euro einzahlen.")
     else
-      kartenpreis = @tarif.betrag
+      kartenpreis = @tarif
 
       puts("------------------")
       puts("- Cinema Magico -")
       puts("- Phantastische Tierwesen")
       # TODO diese Zeile ändern
-      puts("- Preis " + @tarif.betrag().to_s() + " Euro")
-      puts("- Bezahlt " + @eingeworfen.to_s() + " Euro")
+      puts("- Preis " + @tarif.to_s + " Euro")
+      puts("- Bezahlt " + @eingeworfen.to_s + " Euro")
       puts("------------------")
       # die Gesamtsumme, mit dem der Automat nach der letzten Leerung
       # gefuettert wurde
