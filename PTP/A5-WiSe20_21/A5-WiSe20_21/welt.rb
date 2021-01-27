@@ -13,9 +13,9 @@ require_relative 'weltdaten_leser'
 class Welt
   include Singleton
 
-  def erschaffen(groesse,weltdaten_datei)
+  def erschaffen(groesse, weltdaten_datei)
     @groesse = groesse
-    @raeume = Array.new(@groesse) {Array.new(@groesse)}
+    @raeume = Array.new(@groesse) { Array.new(@groesse) } #матрица
     @weltanzeiger = WeltAnzeiger.new(@raeume)
     @weltdaten_datei = weltdaten_datei
     raeume_erzeugen()
@@ -25,16 +25,34 @@ class Welt
   end
 
   def raeume_erzeugen()
-    #TODO
+    for x in (0..@raeume.length - 1)
+      for y in (0..@raeume.length - 1)
+        raum_eintragen(x, y, Raum.new(name_generieren(x, y)))
+      end
+    end
   end
 
   def verbinden()
-    #TODO
+    for x in (0..@raeume.length - 1)
+      for y in (0..@raeume.length - 1)
+        if x != 0
+          @raeume[x][y].setze_ausgang(SpielUtility::SUEDEN, @raeume[x - 1][y])
+        elsif y != 0
+          @raeume[x][y].setze_ausgang(SpielUtility::OSTEN, @raeume[x][y - 1])
+        elsif x != @raeume.length - 1
+          @raeume[x][y].setze_ausgang(SpielUtility::NORDEN, @raeume[x + 1][y])
+        elsif y != @raeume.length - 1
+          @raeume[x][y].setze_ausgang(SpielUtility::WESTEN, @raeume[x][y + 1])
+        end
+      end
+    end
   end
+
 
   def bevoelkern()
     weltdaten = daten_lesen()
     # TODO
+    @raeume
   end
 
   def daten_lesen()
@@ -54,17 +72,17 @@ class Welt
     return @raeume[y][x]
   end
 
-  def raum_eintragen(x,y,raum)
-    check_in_welt(x,y)
+  def raum_eintragen(x, y, raum)
+    check_in_welt(x, y)
     @raeume[y][x] = raum
   end
 
-  def gueltiger_quadrant?(x,y)
-    return 0 <= x && x <@groesse && 0 <=y && y <@groesse
+  def gueltiger_quadrant?(x, y)
+    return 0 <= x && x < @groesse && 0 <= y && y < @groesse
   end
 
   def to_s(kurzform = false)
-    interim = @raeume.inject("[") {|akku, reihe| akku + "[#{reihe.map() {|raum| raum.to_s(kurzform)}.join(",")}]\n "}
+    interim = @raeume.inject("[") { |akku, reihe| akku + "[#{reihe.map() { |raum| raum.to_s(kurzform) }.join(",")}]\n " }
     interim[-2, 2] = "]\n"
     return interim
   end
@@ -72,7 +90,7 @@ class Welt
   private
 
   def check_in_welt(*x_y_werte)
-    raise EndeDerWeltException, "Werte: #{x_y_werte} nicht von dieser Welt" if x_y_werte.any?() {|wert| wert < 0 || wert >= @groesse}
+    raise EndeDerWeltException, "Werte: #{x_y_werte} nicht von dieser Welt" if x_y_werte.any?() { |wert| wert < 0 || wert >= @groesse }
   end
 
   class WeltAnzeiger
@@ -124,7 +142,7 @@ class Welt
     def streifen_mitte(zeile, breite, korridor)
       anzahl_zeilen = max_inventar(zeile)
       raeume_plus_inventar = korridor.map() do |raum|
-        [raum, raum.map() {|elem| elem.to_s(true)}]
+        [raum, raum.map() { |elem| elem.to_s(true) }]
       end
       zeilen_mitte = (0..anzahl_zeilen).inject("") do |acc2, index|
         acc2 + raeume_plus_inventar.inject("") do |acc, raum_plus_inventar|
@@ -154,8 +172,8 @@ class Welt
 
 
     def max_bewohner_size()
-      max_b_size = @meine_raeume.flatten().reject() {|raum| raum.to_a().empty?()}.map() {|raum| raum.to_a()}.flatten().map() {|obj| obj.to_s(true)}.max_by() {|string| string.size()}
-      if ! max_b_size.nil?()
+      max_b_size = @meine_raeume.flatten().reject() { |raum| raum.to_a().empty?() }.map() { |raum| raum.to_a() }.flatten().map() { |obj| obj.to_s(true) }.max_by() { |string| string.size() }
+      if !max_b_size.nil?()
         return max_b_size.size()
       else
         return 0
@@ -164,7 +182,7 @@ class Welt
 
 
     def max_inventar(zeile)
-      @meine_raeume[zeile].max_by() {|raum| raum.count()}.count()
+      @meine_raeume[zeile].max_by() { |raum| raum.count() }.count()
     end
   end
 end
